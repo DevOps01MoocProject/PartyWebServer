@@ -1,0 +1,2 @@
+::1 - - [08/Sep/2020:06:13:04 +0000] "GET /product/dishs HTTP/1.1" 200 49 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
+::1 - - [08/Sep/2020:06:13:04 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://20.37.98.82:49160/product/dishs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
