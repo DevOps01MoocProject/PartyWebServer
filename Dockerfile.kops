@@ -23,8 +23,9 @@ RUN apk add --update \
     && chmod +x /usr/bin/kubectl
 
 #install kops
-RUN  curl -s -L https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64 -o /usr/bin/kops \
-     && chmod +x /usr/bin/kops
+RUN  curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+RUN  chmod +x kops
+RUN sudo mv kops /usr/local/bin/kops
 
 # Install aws-cli
 RUN apk -Uuv add groff less python py-pip
