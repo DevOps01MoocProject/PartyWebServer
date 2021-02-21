@@ -1,9 +1,5 @@
 FROM alpine:3.5
 
-ENV KUBECTL_VERSION 1.19
-ENV KOPS_VERSION 1.19
-
-
 #install kubectl
 RUN apk add --update \
     curl \
@@ -18,10 +14,13 @@ RUN apk add --update \
     bash-completion \
     util-linux pciutils usbutils coreutils binutils findutils grep \
     ca-certificates \
-    openssh-client \
-    && curl -s -L https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/bin/kubectl \
-    && chmod +x /usr/bin/kubectl
+    openssh-client
+    
 
+#install kubectl
+RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+RUN chmod +x ./kubectl
+RUN mv ./kubectl /usr/local/bin/kubectl
 #install kops
 RUN  curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
 RUN  chmod +x kops
