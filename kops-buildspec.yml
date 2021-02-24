@@ -8,7 +8,7 @@ phases:
       - kops get nathantr.com
       - kops export kubecfg nathantr.com --admin
       - kubectl apply -f ./k8s/
-      - kubectl rollout restart deployment/server
+      - kubectl rollout restart deployment/webserver
 
   post_build:
     commands:
