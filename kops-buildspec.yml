@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+       -   export KOPS_STATE_STORE=s3://kops-state.nathantr.com
+       -   export AWS_REGION=ap-southeast-1
+       -   kops get nathantr.com
+       -   kops export kubecfg nathantr.com --admin
+       -   kubectl apply -f ./k8s/
+       -   kubectl set image deployment/webserver webserver=677700034553.dkr.ecr.ap-southeast-1.amazonaws.com/mk-party-web-server:latest
+       -   kubectl rollout restart deployment/webserver
+  post_build:
+    commands:
+       -   aws s3 cp ./.k8s s3://kops-state.nathantr.com --recursive --exclude "*" --include "*.yml"
