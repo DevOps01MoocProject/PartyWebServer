@@ -13,11 +13,12 @@ spec:
         app: webserver
     spec:
       containers:
-      - name: webserver
-        image: 677700034553.dkr.ecr.ap-southeast-1.amazonaws.com/mk-party-web-server:latest
-        ports:
-        - containerPort: 3005
-        
+        - name: webserver
+          image: 677700034553.dkr.ecr.ap-southeast-1.amazonaws.com/mk-party-web-server:latest
+          ports:
+            - containerPort: 3005
+          imagePullPolicy: "Always"
+
 ---
 apiVersion: v1
 kind: Service
@@ -28,6 +29,6 @@ spec:
   selector:
     app: webserver
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 3005
+    - port: 80
+      protocol: TCP
+      targetPort: 3005
