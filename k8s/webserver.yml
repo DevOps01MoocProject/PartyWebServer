@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+spec:
+  selector:
+    matchLabels:
+      app: webserver
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+      - name: webserver
+        image: 677700034553.dkr.ecr.ap-southeast-1.amazonaws.com/mk-party-web-server:latest
+        ports:
+        - containerPort: 3005
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver
+spec:
+  type: LoadBalancer
+  selector:
+    app: webserver
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3005
