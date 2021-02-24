@@ -8,7 +8,6 @@ phases:
       - kops get nathantr.com
       - kops export kubecfg nathantr.com --admin
       - kubectl apply -f ./k8s/
-      - kubectl rollout restart deployment/webserver
   post_build:
     commands:
       - aws s3 cp ./k8s s3://kops-state.nathantr.com --recursive --exclude "*" --include "*.yml"
