@@ -3,8 +3,7 @@ version: 0.2
 phases:
   build:
     commands:
-      - export KOPS_STATE_STORE=s3://kops-state.nathantr.com
-      - export AWS_REGION=ap-southeast-1
+      - export KOPS_STATE_STORE=s3://kops-state.$DOMAIN
       - kops get $DOMAIN
       - kops export kubecfg $DOMAIN --admin
       - kubectl apply -f ./k8s/
