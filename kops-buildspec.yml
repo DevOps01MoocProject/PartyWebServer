@@ -5,11 +5,11 @@ phases:
     commands:
       - export KOPS_STATE_STORE=s3://kops-state.nathantr.com
       - export AWS_REGION=ap-southeast-1
-      - kops get nathantr.com
-      - kops export kubecfg nathantr.com --admin
+      - kops get $DOMAIN
+      - kops export kubecfg $DOMAIN --admin
       - kubectl apply -f ./k8s/
-      - kubectl rollout restart deployment/webserver
+      - kubectl rollout restart deployment/$WEB_PART
 
   post_build:
     commands:
-      - aws s3 cp ./k8s s3://kops-state.nathantr.com --recursive --exclude "*" --include "*.yml"
+      - aws s3 cp ./k8s s3://kops-state.$DOMAIN --recursive --exclude "*" --include "*.yml"
