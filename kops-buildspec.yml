@@ -3,12 +3,13 @@ version: 0.2
 phases:
   build:
     commands:
-      - export KOPS_STATE_STORE=s3://kops-state.$DOMAIN
-      - kops get $DOMAIN
-      - kops export kubecfg $DOMAIN --admin
+      - export KOPS_STATE_STORE=s3://kops-state.${DOMAIN}
+      - $KOPS_STATE_STORE
+      - kops get ${DOMAIN}
+      - kops export kubecfg ${DOMAIN} --admin
       - kubectl apply -f ./k8s/
-      - kubectl rollout restart deployment/$WEB_PART
+      - kubectl rollout restart deployment/${WEB_PART}
 
   post_build:
     commands:
-      - aws s3 cp ./k8s s3://kops-state.$DOMAIN --recursive --exclude "*" --include "*.yml"
+      - aws s3 cp ./k8s s3://kops-state.${DOMAIN} --recursive --exclude "*" --include "*.yml"
