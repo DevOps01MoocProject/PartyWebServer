@@ -7,7 +7,7 @@ phases:
       - kops get $DOMAIN
       - kops export kubecfg $DOMAIN --admin
       - kubectl apply -f ./k8s/
-      - kubectl rollout restart deployment/$WEB_PART
+      - kubectl rollout restart deployment/webserver
 
   post_build:
     commands:
