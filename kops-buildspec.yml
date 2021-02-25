@@ -3,7 +3,7 @@ version: 0.2
 phases:
   build:
     commands:
-      - export KOPS_STATE_STORE=s3://kops-state.${DOMAIN}
+      - export KOPS_STATE_STORE=s3://kops-state.$DOMAIN
       - $KOPS_STATE_STORE
       - kops get ${DOMAIN}
       - kops export kubecfg ${DOMAIN} --admin
