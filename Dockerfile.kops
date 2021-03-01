@@ -14,7 +14,8 @@ RUN apk add --update \
     bash-completion \
     util-linux pciutils usbutils coreutils binutils findutils grep \
     ca-certificates \
-    openssh-client
+    openssh-client \
+    gettext
     
 
 #install kubectl
