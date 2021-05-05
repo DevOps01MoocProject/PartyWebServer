@@ -1,5 +1,5 @@
 pipeline {
-    agent {label EC2CloudAgent}
+    agent {label 'EC2CloudAgent'}
     
     
     stages {      
